@@ -1,0 +1,11 @@
+<?php
+session_start();
+if(empty($_GET['id'])){
+	header('location:view_cart.php');
+	exit;
+}
+$id=$_GET['id'];
+if(isset($_SESSION['cart'][$id])){
+	unset($_SESSION['cart'][$id]);
+}
+header('location:view_cart.php');

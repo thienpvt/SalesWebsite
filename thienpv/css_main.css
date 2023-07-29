@@ -1,0 +1,218 @@
+		*{
+			margin:0;
+			padding: 0;
+		}
+		#all{
+			width:100%;
+			height: 1540px;
+			background-color: azure;
+		}
+		#div_all{
+			height: 1520px;
+			min-width: 1200px;
+		}
+		#header{
+			width: 100%;
+			margin: auto;
+			height: 270px;
+		}
+		#notification{
+			padding-top: 30px;
+			text-align: center;
+			width: 100%;
+			margin: auto;
+			height: 60px;
+		}
+		#pagination{
+			padding-top: 30px;
+			text-align: center;
+			width: 100%;
+			margin: auto;
+			height: 100px;
+		}
+		#header .nav_bar {
+			width: 100%;
+			height: 70px;
+			min-width: 1200px ;
+			background-color: cadetblue;
+			position: fixed;
+			z-index: 99;
+		}
+		.nav_bar .nav_bar2{
+			width: 90%;
+			max-width: 1300px ;
+			margin: auto;
+			height: 100%;
+/*			background-color: black;*/
+			position:relative;
+		}
+		.nav_bar2 img{
+			margin-left:0px;
+			float:left;
+		}
+		.nav_bar2 .search{
+			height: 100%;
+			width: 400px;
+			margin-left: 330px;
+/*			background-color: blue;*/
+			float:left;
+		}
+		.search .form-search{
+			height:100%; 
+			width: 100%;
+			
+		}
+		.form-search .input{
+			height: 36px; 
+			width: 73%;
+			padding-left:20px;
+			border-radius: 5px;
+			
+		}
+		.form-search button{
+			height: 36px; 
+			width: 20%; 
+			font-size: 16px; 
+			font-weight: 300;
+			margin-top: 15px;
+			border-radius: 3px;
+		}
+
+		.nav_bar2 .user{
+			margin-top: 12px;
+			height: 40px;
+			width: 230px;
+			color:white;
+			float: right;
+			font-size: 16px;
+			position: absolute;
+			right: 0px;
+		}
+		.user img{
+			height:100%;
+			padding-right: 15px;
+			
+		}
+		.user a{
+			color: #fff;
+			text-decoration:none;
+		}
+		.user a:hover{
+			text-decoration: underline;
+		}
+		#header .top{
+			width: 100%;
+			height: 70px;
+			background-color: dimgrey;
+			
+		}
+		#header .bot{
+			
+			height: 200px;
+			background-image: url('photos_homepage/wall.jpg');
+			margin: auto;
+			max-width: 1300px;
+			min-width: 1200px;
+		}
+		.bot .list{
+			width:200px;
+			height:100%;
+		}
+		.list table{
+			height:100%;
+			width:200px;
+/*			border: 2px solid black; */
+			border-radius: 5px;
+			
+			background-color: white;
+		}
+		ul{
+			list-style-type: none;
+			margin-top: 10px;
+		}
+		ul > li {
+			display:block;
+			padding-left:10px;
+		}
+		ul > li > ul{
+			display: none;
+		}
+		ul > li:hover ul{
+			display: block;
+			position: absolute;
+			top: -10px;
+			left: 180px;
+		}
+		ul li{
+			margin:auto;
+			padding-top: 5px;
+			background-color: white;
+			width: 170px;
+			height: 30px;
+			position: relative;
+		}
+		li a{
+			text-decoration: none;
+			color: red;
+		}
+		ul > li:hover{
+			background: blue;
+			color: white;
+		}
+		.b{
+			font-size: large;
+
+			
+		}
+		
+		#body{
+			
+			max-width: 1300px ;
+			min-width: 1200px;
+			margin: auto;
+			height: 1120px;
+			background-color: white;
+		}
+		#body .products{
+
+			height:920px;
+			width: 1200px;
+			margin: auto;	
+		}
+		.products table{
+			width: 100%;
+			text-align: center;
+		}
+		.details{
+			height:100%;
+			width: 100%;
+			padding-top: 20px;
+			text-align: center;
+		}
+		.product{
+			padding-top: 15px;
+			height:420px;
+			width:260px;
+			float:left;
+/*			background-color: yellow;*/
+			margin: 20px;
+			border-radius: 8px;
+			text-align: center;
+			
+		 	box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			border: 1px solid #969696;
+			
+		}
+
+
+		#footer{
+			width: 100%;
+			margin: auto;
+			height: 150px;
+			background-color: black;
+		}
+		.error{
+			color:red;
+		}
