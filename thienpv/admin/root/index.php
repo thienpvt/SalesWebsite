@@ -60,6 +60,26 @@ foreach ($resultsM as $result) {
 		$arrM['Đơn đã hủy']=($result['count(*)']*100/$countM);
 	}
 }
+$query5="SELECT sum(total_prices)
+FROM   orders
+WHERE  YEARWEEK(`time_order`, 1) = YEARWEEK(CURDATE(), 1)
+and status='2'";
+$arr_sumW=mysqli_fetch_array(mysqli_query($connect,$query5));
+$sumW=$arr_sumW['sum(total_prices)'];
+
+$query6="SELECT sum(total_prices)
+FROM   orders
+WHERE MONTH(time_order) = MONTH(CURRENT_DATE())
+AND YEAR(time_order) = YEAR(CURRENT_DATE())
+and status='2'";
+$arr_sumM=mysqli_fetch_array(mysqli_query($connect,$query6));
+$sumM=$arr_sumM['sum(total_prices)'];
+
+$query7="SELECT sum(total_prices)
+FROM   orders
+WHERE status='2'";
+$arr_sumM=mysqli_fetch_array(mysqli_query($connect,$query6));
+$sumT=$arr_sumM['sum(total_prices)'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -141,15 +161,18 @@ foreach ($resultsM as $result) {
 				</div>
 			</div>
 			<div id="body">
+				<div id="notification"><h2>Tổng doanh thu:<?php echo ' '.$sumT.' $' ?></h2></div>
 				<div class="products" > 
 
 					<figure class="highcharts-figure">
-					    <div id="container"></div>
-					    
+					    <div id="container">
+					    </div>
+					    Doanh thu tháng: <?php echo $sumM.' $'; ?>
 					</figure>
 					<figure class="highcharts-figure">
-					    <div id="container2"></div>
-					    
+					    <div id="container2">
+					    </div>
+					    Doanh thu tuần: <?php echo $sumW.' $'; ?>
 					</figure>
 
 				</div>

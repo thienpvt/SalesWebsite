@@ -33,27 +33,34 @@ require '../connect.php';
 	from orders
 	join customers ON customers.id=orders.customer_id
 	where name like '%$search%'
-	and status='2'
+	and status = '3'
 	group by customers.name";
-	$table_count=mysqli_query($connect,$count);
-	$array_num_orders=mysqli_fetch_array($table_count);
-	$num_orders=$array_num_orders['count(*)'];
+	$number_rows=mysqli_num_rows(mysqli_query($connect,$count));
+	if ($number_rows==0) {
+		$_SESSION['notification']='Không có đơn';
+		header('location:index.php');
+		exit;
+	}
+	else{
+		$table_count=mysqli_query($connect,$count);
+		$array_num_orders=mysqli_fetch_array($table_count);
+		$num_orders=$array_num_orders['count(*)'];
 
-	$num_orders_in_page=10;
-	$num_pages=ceil($num_orders/$num_orders_in_page);
-	$ignore=$num_orders_in_page*($page-1);
+		$num_orders_in_page=10;
+		$num_pages=ceil($num_orders/$num_orders_in_page);
+		$ignore=$num_orders_in_page*($page-1);
 
-	$query="select orders.*,
-	customers.name,customers.email,customers.phone
-	from customers
-	join orders on orders.customer_id=customers.id
-	where customers.name like '%$search%'
-	and status='2'
-	limit $num_orders_in_page
-	offset $ignore
-	";
-	$results=mysqli_query($connect,$query);
-
+		$query="select orders.*,
+		customers.name,customers.email,customers.phone
+		from customers
+		join orders on orders.customer_id=customers.id
+		where customers.name like '%$search%'
+		and status = '3'
+		limit $num_orders_in_page
+		offset $ignore
+		";
+		$results=mysqli_query($connect,$query);
+	}
 	?>
 	<div id="all">
 		<div id="div_all">
@@ -86,10 +93,10 @@ require '../connect.php';
 				<div class="products" > 
 					<br>
 					<h1>Quản lý đơn hàng</h1>
-					Đơn đã giao <br>
+					<a href="index.php">Đơn đã giao</a> <br>
 					<a href="pending.php">Đơn chờ duyệt</a><br>
 					<a href="approved.php">Đơn đã duyệt</a><br>
-					<a href="canceled.php">Đơn đã hủy</a>
+					Đơn đã hủy
 					<table border="1">
 						<caption><form><input type="search" name="search" value="<?php echo $search ?>" placeholder="Tìm kiếm theo tên khách đặt" size="40"></form></caption>
 						<tr>
@@ -124,10 +131,10 @@ require '../connect.php';
 									<?php echo $result['total_prices']; ?>
 								</td>
 								<td>
-									Đã giao
+									Đã hủy
 								</td>
 								<td>
-									<a href="view_details.php?order_id=<?php echo $result['id'] ?>&sum=<?php echo $result['total_prices'] ?>&position=1">Xem</a>
+									<a href="view_details.php?order_id=<?php echo $result['id'] ?>&sum=<?php echo $result['total_prices'] ?>&position=3">Xem</a>
 								</td>                              
 							</tr>
 						<?php } ?>

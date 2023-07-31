@@ -33,12 +33,17 @@ require '../connect.php';
 	from orders
 	join customers ON customers.id=orders.customer_id
 	where name like '%$search%'
-	and status='2'
+	and status = '0'
 	group by customers.name";
+	$number_rows=mysqli_num_rows(mysqli_query($connect,$count));
+	if ($number_rows==0) {
+		$_SESSION['notification']='Không có đơn';
+		header('location:index.php');
+		exit;
+	}
 	$table_count=mysqli_query($connect,$count);
 	$array_num_orders=mysqli_fetch_array($table_count);
 	$num_orders=$array_num_orders['count(*)'];
-
 	$num_orders_in_page=10;
 	$num_pages=ceil($num_orders/$num_orders_in_page);
 	$ignore=$num_orders_in_page*($page-1);
@@ -48,7 +53,7 @@ require '../connect.php';
 	from customers
 	join orders on orders.customer_id=customers.id
 	where customers.name like '%$search%'
-	and status='2'
+	and status = '0'
 	limit $num_orders_in_page
 	offset $ignore
 	";
@@ -86,8 +91,8 @@ require '../connect.php';
 				<div class="products" > 
 					<br>
 					<h1>Quản lý đơn hàng</h1>
-					Đơn đã giao <br>
-					<a href="pending.php">Đơn chờ duyệt</a><br>
+					<a href="index.php">Đơn đã giao</a> <br>
+					Đơn chờ duyệt<br>
 					<a href="approved.php">Đơn đã duyệt</a><br>
 					<a href="canceled.php">Đơn đã hủy</a>
 					<table border="1">
@@ -99,6 +104,7 @@ require '../connect.php';
 							<th>Thời gian đặt</th>
 							<th>Tổng tiền</th>
 							<th>Trạng thái</th>
+							<th>Chỉnh sửa</th>
 							<th>Xem chi tiết</th>
 						</tr>
 					
@@ -124,10 +130,13 @@ require '../connect.php';
 									<?php echo $result['total_prices']; ?>
 								</td>
 								<td>
-									Đã giao
+									Chờ duyệt
 								</td>
 								<td>
-									<a href="view_details.php?order_id=<?php echo $result['id'] ?>&sum=<?php echo $result['total_prices'] ?>&position=1">Xem</a>
+									<a href="update_order.php?status=1&order_id=<?php echo $result['id'] ?>">Duyệt</a>
+								</td>
+								<td>
+									<a href="view_details.php?order_id=<?php echo $result['id'] ?>&sum=<?php echo $result['total_prices'] ?>&position=0">Xem</a>
 								</td>                              
 							</tr>
 						<?php } ?>

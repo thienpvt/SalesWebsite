@@ -1,11 +1,12 @@
 <?php
 require '../admin_check.php';
-if(empty($_GET['order_id'])||empty($_GET['sum'])){
+if(empty($_GET['order_id'])||empty($_GET['sum'])||!isset($_GET['position'])){
 	header('location:index.php');
 	exit;
 }
 $order_id=addslashes($_GET['order_id']);
 $sum=addslashes($_GET['sum']);
+$position=$_GET['position'];
 require '../connect.php';
 
 $query="select order_products.*,
@@ -85,7 +86,15 @@ $results=mysqli_query($connect,$query);
 								</th>
 							</tr>
 					</table>
-					<a href="index.php">Quay lại</a>
+					<?php if ($position==0) { ?>
+						<a href="pending.php">Quay lại</a>
+					<?php } elseif ($position==1) {?>
+						<a href="approved.php">Quay lại</a>
+					<?php } elseif ($position==3) {?>
+						<a href="canceled.php">Quay lại</a>
+					<?php } else{?>
+						<a href="index.php">Quay lại</a>
+					<?php } ?>
 				</div>
 			</div>
 			<div id="footer"></div>
